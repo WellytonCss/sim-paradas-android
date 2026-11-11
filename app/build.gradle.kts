@@ -19,13 +19,15 @@ android {
         versionName = "1.0.$vc"
     }
 
-    // chave fixa: todas as versões têm a mesma assinatura, então o celular aceita atualizar por cima
+    // chave fixa guardada nos "segredos" do GitHub (ANDROID_KEYSTORE / ANDROID_KEY_PASSWORD):
+    // todas as versões têm a mesma assinatura, então o celular aceita atualizar por cima
+    val pw = System.getenv("ANDROID_KEY_PASSWORD") ?: ""
     signingConfigs {
         create("release") {
             storeFile = file("sim-paradas.jks")
-            storePassword = "SimParadas2026"
+            storePassword = pw
             keyAlias = "sim"
-            keyPassword = "SimParadas2026"
+            keyPassword = pw
         }
     }
     buildTypes {

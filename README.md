@@ -4,6 +4,9 @@ App de campo do SIM Paradas · AMAGGI, em Kotlin + Jetpack Compose. Usa o mesmo 
 
 **Funções:** Programação do dia • Apontamento de avanço/horas • RDO com fotos • Painel (avanço, Curva S, setores) • funciona sem internet (fila de envio automática).
 
+## Assinatura
+A chave do app fica nos segredos do repositório (`ANDROID_KEYSTORE` em base64 e `ANDROID_KEY_PASSWORD`), nunca no código.
+
 ## Como gerar o APK
 Todo envio para o ramo `main` compila o app no GitHub Actions. O APK fica em **Releases** (e em Actions → execução → Artifacts).
 

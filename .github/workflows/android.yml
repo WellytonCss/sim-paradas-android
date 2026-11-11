@@ -18,7 +18,15 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
+      - name: Preparar a chave de assinatura
+        env:
+          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE" ]; then echo "::error::Falta o segredo ANDROID_KEYSTORE (Settings > Secrets and variables > Actions)"; exit 1; fi
+          echo "$ANDROID_KEYSTORE" | base64 -d > app/sim-paradas.jks
       - name: Compilar o app
+        env:
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: chmod +x gradlew && ./gradlew --no-daemon --stacktrace assembleRelease
       - name: Nomear o APK
         run: cp app/build/outputs/apk/release/app-release.apk "SIM-Paradas-1.0.${{ github.run_number }}.apk"
